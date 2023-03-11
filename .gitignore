@@ -1,0 +1,2 @@
+# ignore ALL .cs.meta files
+*.cs.meta
