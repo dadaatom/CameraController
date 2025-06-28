@@ -20,7 +20,7 @@
 
         public void Shake(ShakeProperties properties) {
             _currentProperties = properties;
-            _targetShakeOffset = VectorUtil.RotateVector(new Vector2(properties.Strength, 0), properties.Angle);
+            _targetShakeOffset = RotateVector(new Vector2(properties.Strength, 0), properties.Angle);
             _partionCounter = 0;
             _shakeRadius = properties.Strength * ShakeFunction(_currentProperties.Dampening, (float)_partionCounter / _currentProperties.partitions);
         }
@@ -38,7 +38,7 @@
                         _shakeRadius = _currentProperties.Strength * ShakeFunction(_currentProperties.Dampening, ((float)_partionCounter / (float)_currentProperties.partitions));
 
                         _targetShakeOffset *= -1f * (_shakeRadius / _targetShakeOffset.magnitude);
-                        _targetShakeOffset = VectorUtil.RotateVector(_targetShakeOffset, Random.Range(-1f, 1f) * 180 * _currentProperties.Noise);
+                        _targetShakeOffset = RotateVector(_targetShakeOffset, Random.Range(-1f, 1f) * Mathf.PI * _currentProperties.Noise);
                     }
                     else {
                         _shakeRadius = 0;
@@ -58,6 +58,11 @@
             float b = 1 - Mathf.Pow(x, dampening);
             return b * b * b;
             //return Mathf.Pow(1-Mathf.Pow(x, .25f + 1.75f *dampening),3f);
+        }
+        
+        private static Vector2 RotateVector(Vector2 v, float angle) {
+            return new Vector2(v.x * Mathf.Cos(angle) - v.y * Mathf.Sin(angle),
+                v.x * Mathf.Sin(angle) + v.y * Mathf.Cos(angle));
         }
         
         [System.Serializable]

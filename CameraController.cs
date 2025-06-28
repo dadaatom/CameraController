@@ -49,12 +49,6 @@
 			Vector2 cameraPos = _currentCenter + cameraOffset + CameraShaker.ComputeShake();
 			transform.position = new Vector3(cameraPos.x, cameraPos.y, transform.position.z);
 		}
-		
-		public void SetCamera(Camera camera)
-		{
-			CameraZoomer.
-			MainCamera = camera;
-		}
 
 		public GameObject GetTarget()
 		{
