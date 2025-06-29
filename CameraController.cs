@@ -23,14 +23,16 @@
 			
 			CameraShaker = new CameraShaker();
 			CameraZoomer = new CameraZoomer(MainCamera);
+
+			_currentCenter = transform.position;
 		}
 
 		void FixedUpdate()
 		{
-			_targetVector = _targetObject.transform.position;
-
 			if (_targetObject != null)
 			{
+				_targetVector = _targetObject.transform.position;
+				
 				if (!_currentCenter.Equals(_targetVector))
 				{
 					float distance = cameraSpeed * Time.deltaTime;
